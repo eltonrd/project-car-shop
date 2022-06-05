@@ -19,7 +19,7 @@ enum ControllerErrors {
 export default abstract class Controller<T> {
   abstract route:string;
 
-  public static error = ControllerErrors;
+  public error = ControllerErrors;
 
   constructor(protected service: Service<T>) {}
 
