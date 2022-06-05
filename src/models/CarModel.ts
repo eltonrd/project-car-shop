@@ -16,8 +16,8 @@ const CarSchema = new Schema<CarDocument>({
   versionKey: false,
 });
 
-export default class CarModel extends MongoModel<CarDocument> {
-  constructor() {
-    super(createdModel<CarDocument>('Car', CarSchema));
+export default class CarModel extends MongoModel<Car> {
+  constructor(model = createdModel('Car', CarSchema)) {
+    super(model);
   }
 }
