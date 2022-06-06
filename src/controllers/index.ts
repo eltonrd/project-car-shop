@@ -27,4 +27,19 @@ export default abstract class Controller<T> {
     req: RequestWithBody<T>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
+
+  public async read(
+    _req: Request,
+    res: Response<T[] | ResponseError>,
+  ): Promise<typeof res> {    
+    try {
+      const data = await this.service.read();
+      if (!data) {
+        return res.status(500).json({ error: this.error.internal });
+      }
+      return res.status(200).json(data);
+    } catch (err) {
+      return res.status(500).json({ error: this.error.internal });
+    }
+  }
 }

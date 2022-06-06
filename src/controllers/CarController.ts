@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import Controller, { RequestWithBody, ResponseError } from '.';
 import CarService from '../services/CarService';
 import { Car } from '../interfaces/CarInterface';
@@ -33,6 +33,21 @@ export default class CarController extends Controller<Car> {
       }
       return res.status(201).json(carCreated);
     } catch (error) {
+      return res.status(500).json({ error: this.error.internal });
+    }
+  };
+
+  read = async (
+    _req: Request,
+    res: Response<Car[] | ResponseError>,
+  ): Promise<typeof res> => {    
+    try {
+      const data = await this.service.read();
+      if (!data) {
+        return res.status(500).json({ error: this.error.internal });
+      }
+      return res.status(200).json(data);
+    } catch (err) {
       return res.status(500).json({ error: this.error.internal });
     }
   };
