@@ -48,4 +48,9 @@ export default abstract class Controller<T> {
     req: Request,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
+
+  public abstract update(
+    req: Request,
+    res: Response<T | ResponseError>,
+  ): Promise<typeof res>;
 }

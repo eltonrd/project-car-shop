@@ -72,4 +72,24 @@ export default class CarController extends Controller<Car> {
       return res.status(500).json({ error: this.error.internal });
     }
   };
+
+  update = async (req: Request, res: Response<Car | ResponseError>):
+  Promise<typeof res> => {
+    const { id } = req.params;
+    const idLength = id.length < 24;
+    if (idLength) return res.status(400).json({ error: this.error.lengthId });
+    const { body } = req;
+    if (Object.keys(body).length === 0) {
+      return res.status(400).json({ error: this.error.badRequest });
+    }
+    try {
+      const data = await this.service.update(id, body);
+      if (!data) {
+        return res.status(404).json({ error: this.error.notFound });
+      }
+      return res.status(200).json(data);
+    } catch (err) {
+      return res.status(400).json({ error: this.error.internal });
+    }
+  };
 }
