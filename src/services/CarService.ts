@@ -15,6 +15,11 @@ export default class CarService extends Service<Car> {
     return this.model.create(obj);
   };
 
+  read = async (): Promise<Car[] | ServiceError | null> => this.model.read();
+
+  readOne = async (id: string): Promise<Car | ServiceError | null> => 
+    this.model.readOne(id);
+
   update = async (id: string, obj: Car): Promise<Car | ServiceError | null> => {
     const car = CarInterface.safeParse(obj);
     if (!car.success) {
@@ -22,4 +27,7 @@ export default class CarService extends Service<Car> {
     }
     return this.model.update(id, obj);
   };
+
+  delete = async (id: string): Promise<Car | ServiceError | null> => 
+    this.model.delete(id);
 }
