@@ -2,7 +2,7 @@ import { Schema, model as createdModel, Document } from 'mongoose';
 import { Car } from '../interfaces/CarInterface';
 import MongoModel from './MongoModel';
 
-interface CarDocument extends Car, Document { }
+export interface CarDocument extends Car, Document { }
 
 const CarSchema = new Schema<CarDocument>({
   model: String,
