@@ -14,6 +14,7 @@ enum ControllerErrors {
   notFound = 'Object not found',
   requiredId = 'Id is required',
   badRequest = 'Bad request',
+  lengthId = 'Id must have 24 hexadecimal characters',
 }
 
 export default abstract class Controller<T> {
@@ -42,4 +43,9 @@ export default abstract class Controller<T> {
       return res.status(500).json({ error: this.error.internal });
     }
   }
+
+  public abstract readOne(
+    req: Request,
+    res: Response<T | ResponseError>,
+  ): Promise<typeof res>;
 }
