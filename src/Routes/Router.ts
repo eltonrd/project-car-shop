@@ -1,17 +1,17 @@
 import { Router } from 'express';
 import Controller from '../controllers/index';
 
-export default class CustomRouter<T> {
-  public route: Router;
+export default class CustomRouter <T> {
+  public router: Router;
 
   constructor() {
-    this.route = Router();
+    this.router = Router();
   }
 
-  public createRoute(
+  public addRouter(
     controller: Controller<T>,
     route: string = controller.route,
   ) {
-    this.route.post(route, controller.create);
+    this.router.post(route, controller.create);
   }
 }

@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import Controller, { RequestWithBody, ResponseError } from '.';
-import CarService from '../services/car.service';
+import CarService from '../services/CarService';
 import { Car } from '../interfaces/CarInterface';
 
 export default class CarController extends Controller<Car> {
@@ -18,10 +18,10 @@ export default class CarController extends Controller<Car> {
     return this.$route;
   }
 
-  async create(
+  create = async (
     req: RequestWithBody<Car>,
     res: Response<Car | ResponseError>,
-  ): Promise<typeof res> {
+  ): Promise<typeof res> => {
     const { body } = req;
     try {
       const carCreated = await this.service.create(body);
@@ -35,5 +35,5 @@ export default class CarController extends Controller<Car> {
     } catch (error) {
       return res.status(500).json({ error: this.error.internal });
     }
-  }
+  };
 }

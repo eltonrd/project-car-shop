@@ -7,11 +7,11 @@ export default class CarService extends Service<Car> {
     super(model);
   }
 
-  async create(obj: Car): Promise<Car | ServiceError | null> {
+  create = async (obj: Car): Promise<Car | ServiceError | null> => {
     const car = CarInterface.safeParse(obj);
     if (!car.success) {
       return { error: car.error };
     }
     return this.model.create(obj);
-  }
+  };
 }
