@@ -1,7 +1,6 @@
-import { Model } from 'mongoose';
-import Sinon, * as sinon from 'sinon';
+import * as sinon from 'sinon';
 import { expect } from 'chai';
-import CarModel, { CarDocument } from '../../../models/CarModel';
+import CarModel from '../../../models/CarModel';
 import CarService from '../../../services/CarService';
 
 const mockCar = {
